@@ -4,8 +4,6 @@ import Keyboard from './Keyboard.jsx'
 
 export function App() {
   return (
-    <>
-      <Keyboard />
-    </>
+    <Keyboard />
   )
 }
