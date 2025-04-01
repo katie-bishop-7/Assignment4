@@ -1,12 +1,19 @@
-# React + Vite
+Project Requirements:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+When user presses a key, the key goes down on the screen
 
-Currently, two official plugins are available:
+When user unpresses a key, the key goes up on the screen
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+When user presses shift, shift key goes down and abc keys go uppercase, number keys get swapped for second set along with misc RHS keys
 
-## Expanding the ESLint configuration
+When an uppercase letter must be typed, the shift goes red. 
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+When a lowercase letter must be typed and the shift is being held down, nothing is red. 
+
+When a lowercase letter must be typed, it is highlighted in red.
+
+When the correct character is typed, it goes black and the next letter is underlined. This goes for spaces too.
+
+when an incorrect character is typed, the key goes down but nothing else changes. User does not move on to next letter if previous was incorrect.
+
+When done typing the current phrase, phrase is reset and first letter is underlined.
