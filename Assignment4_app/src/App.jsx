@@ -1,27 +1,57 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import './App.css'
 import Keyboard from './Keyboard.jsx'
 
 
 export function App() {
-  const [phrase, setPhrase] = useState("Coding is both a practical skill and a creative outlet for building innovative solutions.")
+  const phrase = ("Coding is both a practical skill and a creative outlet for building innovative solutions.")
   const [typedPhrase, setTypedPhrase] = useState("")
-  
-  function handleKeyPress(key){
-    if (key === phrase[typedPhrase.length]){
-      if (typedPhrase.length === phrase.length - 1){
-        setPhrase("Done")
-      } else {
-        setTypedPhrase(typedPhrase + key)
+  const [pressedKeys, setPressedKeys] = useState({});
+  const [shiftUp, setShiftUp] = useState(true);
+
+  useEffect(() => {
+    function keydown(e) {
+      if (e.repeat) return;
+      setPressedKeys((prev) => ({ ...prev, [e.key]: true })); // Copilot assisted
+      if (e.key === "Shift") {
+        setShiftUp(false)
+      }
+      if (e.key === phrase[typedPhrase.length]) { // correct key was typed 
+        setTypedPhrase((oldTypedPhrase) => {
+          return (oldTypedPhrase + e.key)
+        })
       }
     }
-  }
+
+    function keyup(e) {
+      setPressedKeys((prev) => ({ ...prev, [e.key]: false })) // Copilot assisted
+      if (e.key === "Shift") {
+        setShiftUp(true)
+      }
+    }
+
+    window.addEventListener("keydown", keydown);
+    window.addEventListener("keyup", keyup);
+
+    return () => {
+      window.removeEventListener("keydown", keydown);
+      window.removeEventListener("keyup", keyup);
+    };
+  }, [typedPhrase, phrase]); // Copilot assisted
+
+
   return (
     <>
       <div className="phrase">
-        <span className="typed-phrase"></span><span className="pointer">C</span>oding is both a practical skill and a creative outlet for building innovative solutions.
+        <span className="typed-phrase">
+          {typedPhrase}
+        </span>
+        <span className="pointer">
+          {phrase.slice(typedPhrase.length, typedPhrase.length + 1)}
+        </span>
+        {phrase.slice(typedPhrase.length + 1)}
       </div>
-      <Keyboard onKeyPress={handleKeyPress}/>
+      <Keyboard shiftUp={shiftUp} pressedKeys={pressedKeys} />
     </>
   )
 }
