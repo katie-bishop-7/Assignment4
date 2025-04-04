@@ -63,7 +63,7 @@ function Keyboard({ shiftUp: shiftUp, pressedKeys: pressedKeys, highlighted: hig
                     <Key value={shiftUp ? "/" : "?"} pressed={pressedKeys} highlighted={highlightedKeys} />
                     <Key value="Shift" pressed={pressedKeys} highlighted={highlightedKeys} />
                 </div>
-                <Key value="Space" shiftUp="space-bar" pressed={pressedKeys} highlighted={highlightedKeys} />
+                <Key value="Space" pressed={pressedKeys} highlighted={highlightedKeys} />
             </div>
         </main>
     )
